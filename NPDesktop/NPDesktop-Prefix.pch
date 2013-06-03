@@ -1,0 +1,37 @@
+//
+// Prefix header for all source files of the 'NPDesktop' target in the 'NPDesktop' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+
+#if !defined(DEBUG_LEVEL) || DEBUG_LEVEL == 0
+#define DLogInfo(...)
+#define DLogWarn(...)
+#define DLogError(...)
+
+#elif DEBUG_LEVEL == 1
+#define DLogInfo(...)
+#define DLogWarn(...)
+#define DLogError(fmt, ...) NSLog((@"ERROR: %s [%d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#elif DEBUG_LEVEL == 2
+#define DLogInfo(...)
+#define DLogWarn(fmt, ...) NSLog((@"WARN: %s [%d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define DLogError(fmt, ...) NSLog((@"ERROR: %s [%d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#elif DEBUG_LEVEL > 2
+#define DLogInfo(fmt, ...) NSLog((@"INFO: %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define DLogWarn(fmt, ...) NSLog((@"WARN: %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define DLogError(fmt, ...) NSLog((@"ERROR: %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#endif
